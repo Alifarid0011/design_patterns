@@ -12,10 +12,10 @@ type User struct {
 type UserList []User
 
 type UserListProxy struct {
-	SomeDatabase              UserList
-	StackCache                UserList
-	StackCapacity             int
-	DidDidLastSearchUsedCache bool
+	SomeDatabase           *UserList
+	StackCache             UserList
+	StackCapacity          int
+	DidLastSearchUsedCache bool
 }
 
 func (u *UserListProxy) FindUser(id int32) (User, error) {
