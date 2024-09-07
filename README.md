@@ -1,2 +1,2 @@
-# design_patterns
-# design_patterns
+# design patterns in go lang
+
