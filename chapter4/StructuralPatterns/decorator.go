@@ -37,7 +37,7 @@ type Onion struct {
 
 func (o *Onion) AddIngredient() (string, error) {
 	if o.Ingredient == nil {
-		return "", errors.New("an IngredientAdd is needed in the Ingredient field of the Onion")
+		return "", errors.New("An IngredientAdd is needed in the Ingredient field of the Onion")
 	}
 	s, err := o.Ingredient.AddIngredient()
 	if err != nil {
