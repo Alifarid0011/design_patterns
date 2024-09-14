@@ -34,11 +34,11 @@ type Match struct {
 	LocalShoots   uint16
 	VisitorShoots uint16
 }
-type teamFlyweightFactory struct {
+type TeamFlyweightFactory struct {
 	createdTeams map[int]*Team
 }
 
-func (t *teamFlyweightFactory) GetTeam(teamID int) *Team {
+func (t *TeamFlyweightFactory) GetTeam(teamID int) *Team {
 	if t.createdTeams[teamID] != nil {
 		return t.createdTeams[teamID]
 	}
@@ -60,11 +60,11 @@ func getTeamFactory(team int) Team {
 		}
 	}
 }
-func (t *teamFlyweightFactory) GetNumberOfObjects() int {
+func (t *TeamFlyweightFactory) GetNumberOfObjects() int {
 	return len(t.createdTeams)
 }
-func NewTeamFactory() teamFlyweightFactory {
-	return teamFlyweightFactory{
+func NewTeamFactory() TeamFlyweightFactory {
+	return TeamFlyweightFactory{
 		createdTeams: make(map[int]*Team),
 	}
 }
