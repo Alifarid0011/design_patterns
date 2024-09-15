@@ -11,8 +11,7 @@ func TestCreateDefaultChain(t *testing.T) {
 	writerLogger := WriterLogger{Writer: &myWriter}
 	second := SecondLogger{NextChain: &writerLogger}
 	chain := FirstLogger{NextChain: &second}
-	t.Run("3 loggers, 2 of them writes to console, second only if it founds "+
-		"the word 'hello', third writes to some variable if second found 'hello'",
+	t.Run("3 loggers, 2 of them writes to console, second only if it founds the word 'hello', third writes to some variable if second found 'hello'",
 		func(t *testing.T) {
 			chain.Next("message that breaks the chain\n")
 			if myWriter.receivedMessage != nil {
