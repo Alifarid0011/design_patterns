@@ -1,6 +1,9 @@
 package main
 
-import "io"
+import (
+	"fmt"
+	"io"
+)
 
 type ChainLogger interface {
 	Next(string)
@@ -25,11 +28,15 @@ type WriterLogger struct {
 func (w *WriterLogger) Next(s string) {}
 
 type myTestWriter struct {
-	receivedMessage string
+	receivedMessage *string
 }
 
 func (m *myTestWriter) Write(p []byte) (int, error) {
-	m.receivedMessage += string(p)
+	if m.receivedMessage == nil {
+		m.receivedMessage = new(string)
+	}
+	tempMessage := fmt.Sprintf("%s%s", m.receivedMessage, p)
+	m.receivedMessage = &tempMessage
 	return len(p), nil
 }
 func (m *myTestWriter) Next(s string) {
