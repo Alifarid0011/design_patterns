@@ -57,10 +57,24 @@ func (m *myTestWriter) Write(p []byte) (int, error) {
 	if m.receivedMessage == nil {
 		m.receivedMessage = new(string)
 	}
-	tempMessage := fmt.Sprintf("%s%s", m.receivedMessage, p)
+	tempMessage := fmt.Sprintf("%v%s", m.receivedMessage, p)
 	m.receivedMessage = &tempMessage
 	return len(p), nil
 }
 func (m *myTestWriter) Next(s string) {
 	m.Write([]byte(s))
+}
+
+type ClosureChain struct {
+	NextChain ChainLogger
+	Closure   func(string)
+}
+
+func (c *ClosureChain) Next(s string) {
+	if c.Closure != nil {
+		c.Closure(s)
+	}
+	if c.NextChain != nil {
+		c.Next(s)
+	}
 }
